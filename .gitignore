@@ -1,0 +1,65 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+dist
+dist-ssr
+*.local
+bower_components
+.pnp
+.pnp.js
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+CLAUDE.md
+.claude/
+.claude-cache/
+cursor.md
+CURSOR.md
+.cursor/
+.cursorrules
+.cursor-tutor
+.cursor/rules/
+gemini.md
+.gemini/
+.gemini-cache/
+.gemini-tutor/
+.gemini/rules/
+.gemini/rules/
+.agent/
+.agent-cache/
+.agent-tutor/
+.agent/rules/
+.agent/rules/
+.agents/
+.agents-cache/
+.agents-tutor/
+.agents/rules/
+.agents/rules/
+
+# Local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+coverage
+
+# Storybook
+storybook-static
