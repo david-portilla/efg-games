@@ -1,5 +1,14 @@
 @import 'tailwindcss';
 
+/* Surface card — hover via CSS instead of JS handlers */
+.surface-card {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+}
+.surface-card:hover {
+  background-color: var(--bg-surface-hover);
+}
+
 :root {
   /* Backgrounds */
   --bg-primary: #0a0a0a;
