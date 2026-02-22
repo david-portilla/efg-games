@@ -17,7 +17,9 @@ export function Feed() {
     <main className="bg-bg-primary min-h-screen">
       <div className="mx-auto max-w-2xl px-4 py-6">
         <header className="mb-6">
-          <h1 className="text-text-primary text-xl font-semibold tracking-tight">Feed</h1>
+          <h1 className="text-text-primary text-lg font-semibold tracking-tight md:text-xl">
+            Feed
+          </h1>
         </header>
         <section aria-label="Posts feed">
           <ErrorBoundary
