@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { PostDetail } from '@/features/post';
+import { ErrorBoundary } from '@/shared/components/ErrorBoundary';
+import { PostErrorFallback } from '@/shared/components/ErrorFallback';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -22,7 +24,9 @@ export default async function PostPage({ params }: PostPageProps) {
             ← Back
           </Link>
         </nav>
-        <PostDetail postId={postId} />
+        <ErrorBoundary fallback={(error) => <PostErrorFallback error={error} />}>
+          <PostDetail postId={postId} />
+        </ErrorBoundary>
       </div>
     </main>
   );
