@@ -121,4 +121,34 @@ describe('FeedList integration', () => {
       expect(screen.getByText(/failed to load posts/i)).toBeInTheDocument();
     });
   });
+
+  it('renders a new post at the top with data-new attribute when addNewPost is dispatched', async () => {
+    mockFetch.mockImplementation((input: RequestInfo) => {
+      const url = typeof input === 'string' ? input : input.url;
+      if (url.includes('/posts')) return Promise.resolve(makePaginatedResponse(makePosts(2), 40));
+      if (url.includes('/users')) return Promise.resolve(makeUserResponse());
+      return Promise.reject(new Error(`Unexpected fetch: ${url}`));
+    });
+
+    const { store } = renderWithProviders(<FeedList />);
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('article')).toHaveLength(2);
+    });
+
+    // Directly dispatch — simulates what useNewPostSimulator does
+    act(() => {
+      store.dispatch({
+        type: 'feed/addNewPost',
+        payload: { id: 10001, title: 'Simulated Post', body: 'Just happened', userId: 1 },
+      });
+    });
+
+    await waitFor(() => {
+      const articles = screen.getAllByRole('article');
+      expect(articles).toHaveLength(3);
+      expect(articles[0]).toHaveAttribute('data-new', 'true');
+      expect(articles[0].className).toContain('new-post-enter');
+    });
+  });
 });
