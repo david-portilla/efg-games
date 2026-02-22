@@ -1,5 +1,7 @@
 'use client';
 
+import { FeedList } from './FeedList';
+
 /**
  * Root feed component — composes the feed layout with header and post list.
  * Imported by `app/feed/page.tsx` as a thin wrapper.
@@ -11,7 +13,9 @@ export function Feed() {
         <header className="mb-6">
           <h1 className="text-text-primary text-xl font-semibold tracking-tight">Feed</h1>
         </header>
-        <section aria-label="Posts feed">{/* FeedList goes here — EFG-019 */}</section>
+        <section aria-label="Posts feed">
+          <FeedList />
+        </section>
       </div>
     </main>
   );
