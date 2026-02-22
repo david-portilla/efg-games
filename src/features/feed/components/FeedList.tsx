@@ -4,6 +4,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { useGetPostsPaginatedQuery } from '../api';
 import { useGetUserByIdQuery } from '@/features/users/api';
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
+import { useScrollRestore } from '../hooks/useScrollRestore';
 import { PostCard } from './PostCard';
 import { FeedSkeleton } from './FeedSkeleton';
 import type { Post } from '../types';
@@ -11,9 +12,9 @@ import type { Post } from '../types';
 const PAGE_SIZE = 20;
 
 /** Renders a single PostCard resolving the author via RTK Query. */
-function PostCardWithAuthor({ post }: { post: Post }) {
+function PostCardWithAuthor({ post, onNavigate }: { post: Post; onNavigate: () => void }) {
   const { data: author } = useGetUserByIdQuery(post.userId);
-  return <PostCard post={post} author={author} />;
+  return <PostCard post={post} author={author} onNavigate={onNavigate} />;
 }
 
 /**
@@ -26,6 +27,7 @@ function PostCardWithAuthor({ post }: { post: Post }) {
 export function FeedList() {
   const [skip, setSkip] = useState(0);
   const [loadedPosts, setLoadedPosts] = useState<Post[]>([]);
+  const { saveScroll } = useScrollRestore();
 
   const { data, isFetching, isError } = useGetPostsPaginatedQuery({ limit: PAGE_SIZE, skip });
 
@@ -63,7 +65,7 @@ export function FeedList() {
     <div role="feed" aria-busy={isFetching} aria-label="Posts">
       <div className="flex flex-col gap-3">
         {allPosts.map((post) => (
-          <PostCardWithAuthor key={post.id} post={post} />
+          <PostCardWithAuthor key={post.id} post={post} onNavigate={saveScroll} />
         ))}
       </div>
 

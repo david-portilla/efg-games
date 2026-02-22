@@ -9,20 +9,26 @@ import type { Author } from '@/features/users/types';
 interface PostCardProps {
   post: Post;
   author: Author | undefined;
+  onNavigate?: () => void;
 }
 
 const BODY_MAX_LENGTH = 100;
 
 /** Renders a single post card with author avatar, name, title, and truncated body.
  * Wrapped in `React.memo` to avoid re-renders when the feed list updates. */
-export const PostCard = memo(function PostCard({ post, author }: PostCardProps) {
+export const PostCard = memo(function PostCard({ post, author, onNavigate }: PostCardProps) {
   const truncatedBody =
     post.body.length > BODY_MAX_LENGTH ? `${post.body.slice(0, BODY_MAX_LENGTH)}...` : post.body;
 
   const authorName = author ? `${author.firstName} ${author.lastName}` : '—';
 
   return (
-    <Link href={`/post/${post.id}`} className="block" aria-label={`Read post: ${post.title}`}>
+    <Link
+      href={`/post/${post.id}`}
+      className="block"
+      aria-label={`Read post: ${post.title}`}
+      onClick={onNavigate}
+    >
       <article className="surface-card cursor-pointer rounded-xl p-4 transition-colors duration-200 md:p-5">
         <div className="flex items-center gap-3">
           {author?.image ? (
