@@ -13,9 +13,6 @@ export const postsApi = baseApi.injectEndpoints({
     getPostsPaginated: builder.query<PaginatedPostsResponse, PostsQueryParams>({
       query: ({ limit, skip }) => `/posts?limit=${limit}&skip=${skip}&select=id,title,body,userId`,
     }),
-    getPostById: builder.query<Post, number>({
-      query: (id) => `/posts/${id}`,
-    }),
     /** Used by the new post simulator (EFG-024) to create posts via dummyjson mock endpoint. */
     addPost: builder.mutation<Post, Pick<Post, 'title' | 'body' | 'userId'>>({
       query: (body) => ({
@@ -27,4 +24,4 @@ export const postsApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetPostsPaginatedQuery, useGetPostByIdQuery, useAddPostMutation } = postsApi;
+export const { useGetPostsPaginatedQuery, useAddPostMutation } = postsApi;
