@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import reducer, { addNewPost, setScrollPosition, clearNewPosts } from '../slice';
-import type { Post } from '../types';
+import reducer, { addNewPost, setScrollPosition, clearNewPosts } from './slice';
+import type { Post } from './types';
 
 const mockPost = (id: number): Post => ({
   id,
