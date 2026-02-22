@@ -22,7 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased">
-        <Providers>{children}</Providers>
+        <a
+          href="#main-content"
+          className="bg-accent text-text-primary fixed top-2 left-2 z-50 -translate-y-16 rounded px-3 py-1.5 text-sm font-medium transition-transform duration-150 focus:translate-y-0"
+        >
+          Skip to content
+        </a>
+        <Providers>
+          <div id="main-content">{children}</div>
+        </Providers>
       </body>
     </html>
   );

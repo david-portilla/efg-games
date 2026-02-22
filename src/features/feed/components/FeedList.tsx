@@ -75,6 +75,11 @@ export function FeedList() {
 
   return (
     <div role="feed" aria-busy={isFetching} aria-label="Posts">
+      {/* Why: aria-live announces new posts to screen readers without moving focus. */}
+      <div aria-live="polite" aria-atomic="false" className="sr-only">
+        {newPosts.length > 0 &&
+          `${newPosts.length} new post${newPosts.length > 1 ? 's' : ''} arrived`}
+      </div>
       <div className="flex flex-col gap-3">
         {newPosts.map((post) => (
           <PostCardWithAuthor key={post.id} post={post} onNavigate={saveScroll} isNew />
