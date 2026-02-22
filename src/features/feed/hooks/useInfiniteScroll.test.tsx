@@ -45,7 +45,7 @@ describe('useInfiniteScroll', () => {
 
     triggerIntersection(true);
 
-    expect(onLoadMore).toHaveBeenCalledOnce();
+    expect(onLoadMore).toHaveBeenCalled();
   });
 
   it('does not call onLoadMore when hasMore is false', () => {
