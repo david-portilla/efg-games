@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   ci:
-    name: lint → typecheck → test → build
+    name: Quality checks
     runs-on: ubuntu-latest
 
     steps:
