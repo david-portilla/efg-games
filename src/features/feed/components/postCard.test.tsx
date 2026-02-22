@@ -65,4 +65,16 @@ describe('PostCard', () => {
     const avatar = screen.getByAltText('Jane Doe avatar');
     expect(avatar).toBeInTheDocument();
   });
+
+  it('does not render a link when isNew is true (simulated post)', () => {
+    render(<PostCard post={mockPost} author={mockAuthor} isNew />);
+    const link = screen.queryByRole('link');
+    expect(link).not.toBeInTheDocument();
+
+    // Should render the article directly
+    const article = screen.getByRole('article');
+    expect(article).toHaveAttribute('data-new', 'true');
+    expect(screen.getByText('Fake')).toBeInTheDocument();
+    expect(screen.getByText('New')).toBeInTheDocument();
+  });
 });
