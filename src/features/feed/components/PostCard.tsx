@@ -10,6 +10,8 @@ interface PostCardProps {
   post: Post;
   author: Author | undefined;
   onNavigate?: () => void;
+  /** Marks the card as newly arrived — used to apply the highlight animation. */
+  isNew?: boolean;
 }
 
 const BODY_MAX_LENGTH = 100;
