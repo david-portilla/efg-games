@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { PostDetailErrorBoundary } from '@/features/post/components/PostDetailErrorBoundary';
-import { PostDetailSkeleton } from '@/features/post/components/PostDetailSkeleton';
+import { PostDetailErrorBoundary, PostDetailSkeleton } from '@/features/post';
 
 // Why: dynamic import keeps PostDetail's JS out of the feed bundle — only
 // loaded when the user navigates to a post. Skeleton shown during hydration.
