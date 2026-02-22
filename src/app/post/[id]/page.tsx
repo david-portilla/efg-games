@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { PostDetailErrorBoundary, PostDetailSkeleton } from '@/features/post';
@@ -10,6 +11,16 @@ const PostDetail = dynamic(() => import('@/features/post').then((m) => m.PostDet
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const res = await fetch(`https://dummyjson.com/posts/${id}?select=title`, {
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) return { title: 'Post' };
+  const { title } = await res.json();
+  return { title };
 }
 
 /** Thin wrapper — all logic lives in `features/post`. */
