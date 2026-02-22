@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { PostDetail } from '@/features/post';
-import { ErrorBoundary } from '@/shared/components/ErrorBoundary';
-import { PostErrorFallback } from '@/shared/components/ErrorFallback';
+import { PostDetailErrorBoundary } from '@/features/post/components/PostDetailErrorBoundary';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -19,14 +18,14 @@ export default async function PostPage({ params }: PostPageProps) {
           <Link
             href="/feed"
             aria-label="Back to feed"
-            className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1 text-sm transition-colors duration-200"
+            className="text-text-secondary hover:text-text-primary inline-flex min-h-[44px] items-center gap-1 text-sm transition-colors duration-200"
           >
             ← Back
           </Link>
         </nav>
-        <ErrorBoundary fallback={(error) => <PostErrorFallback error={error} />}>
+        <PostDetailErrorBoundary>
           <PostDetail postId={postId} />
-        </ErrorBoundary>
+        </PostDetailErrorBoundary>
       </div>
     </main>
   );

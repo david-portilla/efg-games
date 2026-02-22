@@ -60,10 +60,10 @@ export const PostCard = memo(function PostCard({
             alt={`${authorName} avatar`}
             width={40}
             height={40}
-            className="rounded-full"
+            className="shrink-0 rounded-full"
           />
         ) : (
-          <div className="bg-skeleton h-10 w-10 animate-pulse rounded-full" />
+          <div className="bg-skeleton h-10 w-10 shrink-0 animate-pulse rounded-full" />
         )}
         <span className="text-text-primary text-sm font-medium">{authorName}</span>
       </div>

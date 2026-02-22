@@ -44,9 +44,11 @@ export function PostDetail({ postId }: PostDetailProps) {
         <span className="text-text-secondary text-sm font-medium">{authorName}</span>
       </div>
 
-      <h1 className="text-text-primary mb-4 text-lg leading-snug font-semibold">{post.title}</h1>
+      <h1 className="text-text-primary mb-4 text-xl leading-snug font-semibold md:text-2xl">
+        {post.title}
+      </h1>
 
-      <p className="text-text-secondary leading-relaxed">{post.body}</p>
+      <p className="text-text-secondary text-sm leading-relaxed md:text-base">{post.body}</p>
     </article>
   );
 }
