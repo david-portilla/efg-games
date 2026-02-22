@@ -10,8 +10,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Feed',
+  title: {
+    default: 'EFG Feed',
+    template: '%s | EFG Feed',
+  },
   description: 'A scrollable feed of posts with real-time updates.',
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
