@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
 import { setScrollPosition } from '../slice';
 
@@ -31,7 +31,7 @@ export function useScrollRestore() {
     return () => window.removeEventListener('pagehide', handleBeforeUnload);
   }, [dispatch]);
 
-  const saveScroll = () => dispatch(setScrollPosition(window.scrollY));
+  const saveScroll = useCallback(() => dispatch(setScrollPosition(window.scrollY)), [dispatch]);
 
   return { saveScroll };
 }

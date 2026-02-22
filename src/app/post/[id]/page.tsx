@@ -1,6 +1,13 @@
 import Link from 'next/link';
-import { PostDetail } from '@/features/post';
+import dynamic from 'next/dynamic';
 import { PostDetailErrorBoundary } from '@/features/post/components/PostDetailErrorBoundary';
+import { PostDetailSkeleton } from '@/features/post/components/PostDetailSkeleton';
+
+// Why: dynamic import keeps PostDetail's JS out of the feed bundle — only
+// loaded when the user navigates to a post. Skeleton shown during hydration.
+const PostDetail = dynamic(() => import('@/features/post').then((m) => m.PostDetail), {
+  loading: () => <PostDetailSkeleton />,
+});
 
 interface PostPageProps {
   params: Promise<{ id: string }>;

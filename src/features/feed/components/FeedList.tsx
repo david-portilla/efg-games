@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { useGetPostsPaginatedQuery } from '../api';
 import { useGetUserByIdQuery } from '@/features/users/api';
 import { useAppSelector } from '@/shared/lib/hooks';
@@ -13,8 +13,9 @@ import type { Post } from '../types';
 
 const PAGE_SIZE = 20;
 
-/** Renders a single PostCard resolving the author via RTK Query. */
-function PostCardWithAuthor({
+/** Renders a single PostCard resolving the author via RTK Query.
+ * Memoized so stable post/author/onNavigate props skip re-renders. */
+const PostCardWithAuthor = memo(function PostCardWithAuthor({
   post,
   onNavigate,
   isNew = false,
@@ -25,7 +26,7 @@ function PostCardWithAuthor({
 }) {
   const { data: author } = useGetUserByIdQuery(post.userId);
   return <PostCard post={post} author={author} onNavigate={onNavigate} isNew={isNew} />;
-}
+});
 
 /**
  * Infinite-scrolling list of posts — accumulates pages as the user scrolls.
