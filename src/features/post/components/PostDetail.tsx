@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
 import { useGetPostByIdQuery } from '../api';
 import { useGetUserByIdQuery } from '@/features/users/api';
 import { PostDetailSkeleton } from './PostDetailSkeleton';
@@ -13,6 +14,7 @@ interface PostDetailProps {
 export function PostDetail({ postId }: PostDetailProps) {
   const { data: post, isFetching, isError } = useGetPostByIdQuery(postId);
   const { data: author } = useGetUserByIdQuery(post?.userId ?? 0, { skip: !post?.userId });
+  const [imgError, setImgError] = useState(false);
 
   if (isFetching) {
     return <PostDetailSkeleton />;
@@ -31,13 +33,14 @@ export function PostDetail({ postId }: PostDetailProps) {
   return (
     <article className="mx-auto max-w-prose">
       <div className="mb-6 flex flex-col items-center gap-2">
-        {author?.image ? (
+        {author?.image && !imgError ? (
           <Image
             src={author.image}
             alt={`${authorName} avatar`}
             width={80}
             height={80}
             className="rounded-full"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="bg-skeleton h-20 w-20 animate-pulse rounded-full" />

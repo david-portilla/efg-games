@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import type { Post } from '../types';
 import type { Author } from '@/features/users/types';
 
@@ -24,6 +24,8 @@ export const PostCard = memo(function PostCard({
   onNavigate,
   isNew = false,
 }: PostCardProps) {
+  const [imgError, setImgError] = useState(false);
+
   const truncatedBody =
     post.body.length > BODY_MAX_LENGTH ? `${post.body.slice(0, BODY_MAX_LENGTH)}...` : post.body;
 
@@ -54,13 +56,14 @@ export const PostCard = memo(function PostCard({
       )}
 
       <div className="flex items-center gap-3">
-        {author?.image ? (
+        {author?.image && !imgError ? (
           <Image
             src={author.image}
             alt={`${authorName} avatar`}
             width={40}
             height={40}
             className="shrink-0 rounded-full"
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="bg-skeleton h-10 w-10 shrink-0 animate-pulse rounded-full" />
