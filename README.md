@@ -70,6 +70,9 @@ bun dev
 # macOS/Linux
 curl -fsSL https://bun.sh/install | bash
 
+# Windows (PowerShell)
+powershell -c "irm bun.sh/install.ps1 | iex"
+
 # Verify installation
 bun --version
 ```
@@ -184,6 +187,24 @@ bun run lint && bun run test:run && bun run build
 ## 📄 Architecture
 
 See [DECISIONS.md](./DECISIONS.md) for detailed architectural decisions covering framework choice, state management, infinite scroll implementation, real-time simulation, error boundaries, performance optimizations, and accessibility.
+
+---
+
+## 📦 Packaging for submission
+
+```bash
+# macOS/Linux
+cd ..
+zip -r efg-games.zip efg-games --exclude "efg-games/node_modules/*"
+
+# Windows (PowerShell)
+Compress-Archive -Path efg-games -DestinationPath efg-games.zip `
+  -CompressionLevel Optimal
+# Then manually delete node_modules from the archive if included
+```
+
+> The `.git` directory is included automatically. `node_modules` must be excluded.
+> After unzipping, the evaluator runs `bun install` to restore dependencies.
 
 ---
 
