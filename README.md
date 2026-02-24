@@ -27,6 +27,7 @@ EFG Feed is an infinite-scrolling feed of posts with a post detail view and real
 ```bash
 # 1. Install Bun (if not installed)
 curl -fsSL https://bun.sh/install | bash
+source ~/.zshrc   # ← reload shell so `bun` is available
 
 # 2. Clone the repository
 git clone git@github.com:david-portilla/efg-games.git
@@ -69,6 +70,7 @@ bun dev
 ```bash
 # macOS/Linux
 curl -fsSL https://bun.sh/install | bash
+source ~/.zshrc   # reload shell (or open a new terminal)
 
 # Windows (PowerShell)
 powershell -c "irm bun.sh/install.ps1 | iex"
@@ -76,6 +78,9 @@ powershell -c "irm bun.sh/install.ps1 | iex"
 # Verify installation
 bun --version
 ```
+
+> [!NOTE]
+> After installing Bun, you **must** reload your shell (`source ~/.zshrc`) or open a new terminal window before running `bun` commands.
 
 ---
 
